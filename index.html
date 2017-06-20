@@ -1,49 +1,160 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+	var link = document.createElement("link");
+link.rel = "stylesheet";
+link.type = "text/css";
+link.href = window.location.search.match(/print-pdf/gi)
+    ? "css/print/pdf.css"
+    : "css/print/paper.css";
+document.getElementsByTagName("head")[0].appendChild(link);
+</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section data-markdown>
+				## Tdoc
+				用友前端文档生成工具
+			</section>
+			<section>如何使用</section>
+			<section data-markdown>
+				安装
+
+				```
+				npm install tdoc-cli [-g]
+				```
+</section>
+<section data-markdown>
+				使用
+
+				```
+				cd /path/to/project/   进入项目目录
+				tdoc init  初始化tdoc配置文件，编写配置文件tdoc.config
+				tdoc build   构建文档
+				```
+			</section>
+			<section data-markdown>
+				配置
+
+				```json
+				{
+				    "name": "tdoc",
+				    "dest": "path/to/destination", // 默认为  "_docs"
+				    "examplePath": "./examples", // 示例代码路径 默认 "./"
+				    "template": "path/to/templte", // 默认使用 tdoc 内置的模板
+				    "options": { // 通用编译器配置
+				        "markdwon": { // 对于 markdown 编译器进行统一配置
+				            "memuLevel": 2
+				        }
+				    },
+				    "common": { // 通用配置，包括主页配置等
+				        "title": "tdoc",
+				        "footer": "Made By YMFE Team. © 2014 - 2016",
+				        "home": "YMFE",
+				        "homeUrl": "http://tinper.org/",
+				        "navbars": [{ // 导航栏配置
+				            "name": "tdoc",
+				            "url": "http://tinper.org/tdoc/"
+				        }]
+				    },
+				    "pages": [{
+				        "name": "index", // Page Name 会根据他生成 html 文件，例  index.html
+				        "title": "开始", // Page Title
+				        "banner": { // Banner 配置
+				            "title": "tdoc",
+				            "description": "开始"
+				        },
+				        "content": "./README.md",  // 内容
+				        "options": { // 此 Page 用的编译器的配置
+				            "menuLevel": 2
+				        }
+				    }, {
+				        "name": "hybird",
+				        "title": "混合开发",
+				        "intro": "document/README.md", // 介绍
+				        "content": { // 单页多模块配置
+				            "sidebar": true, // 是否显示侧边目录
+				            "blocks": [{
+				                "name": "简介", // 标题
+				                "content": "document/hybrid/README.md" // 内容
+				            }, {
+				                "name": "Hybrid" // 只有标题，做目录和分割用
+				            }, {
+				                "name": "说明",
+				                "sub": true, // 标题在目录里已子目录形式显示
+				                "content": "modules/hybrid/framework/README.md"
+				            }]
+				        }
+				    }, {
+				        "name":"FAQ",
+				        "title":"FAQ",
+				        "url": "https://github.com/iuap-design/tdoc/issues"
+				    }]
+				}
+				```
+			</section>
+			<section>
+				实现机制
+			</section>
+			<section>
+				<p>
+					art-template
+				</p>
+				<p>
+					marked
+				</p>
+			</section>
+			<section>
+				The End
+			</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+	<script>
+	// More info about config & dependencies:
+// - https://github.com/hakimel/reveal.js#configuration
+// - https://github.com/hakimel/reveal.js#dependencies
+Reveal.initialize({
+    dependencies: [
+        {
+            src: "plugin/markdown/marked.js"
+        },
+        {
+            src: "plugin/markdown/markdown.js"
+        },
+        {
+            src: "plugin/notes/notes.js",
+            async: true
+        },
+        {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+                hljs.initHighlightingOnLoad();
+            }
+        }
+    ]
+});
+</script>
+</body>
+
 </html>
